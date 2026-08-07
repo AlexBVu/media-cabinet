@@ -11,8 +11,9 @@ def build_billboard():
 def begin_camera():
     begin_mode_3d(Camera3D(Vector3(10,10,0)))
 
-# TODO: build billboard
-# TODO: build camera3d
+# TODO: build a box
+# TODO: slide the box
+# TODO: add tween to the box
     
 def main():
     init_window(800, 450, "A 3d world")
