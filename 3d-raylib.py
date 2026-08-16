@@ -2,6 +2,11 @@ from pyray import *
 import math
 import random
 
+# TODO: build a cube
+# TODO: slide the cube
+# TODO: tween the cube
+
+
 def main():
     init_window(900, 500, "3d movement")
     rl_set_line_width(3)
@@ -19,6 +24,11 @@ def main():
         clear_background(SKYBLUE)
         begin_mode_3d(camera)
 
+        position = Vector3(1,1,1)
+
+        # DrawCube(Vector3 position, float width, float height, float length, Color color);     
+        draw_cube((Vector3(1, 0.0, 0.5)), 0.4, 1.0, 0.25, RED)
+
         draw_grid(map_size * 10, 0.2)
         draw_plane((0, -.01, 0),(map_size * 2, map_size * 2), WHITE)
 
@@ -30,7 +40,7 @@ def main():
 class Player():
 
     def __init__(self) -> None:
-        self.pos = Vector3(1.5, 0.5, 1.5)
+        self.pos = Vector3(0.0, 0.5, 0.0)
         self.yaw = 0
         self.pitch = 0
         self.sensitivity = .003
