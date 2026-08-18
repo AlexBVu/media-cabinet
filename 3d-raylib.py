@@ -1,9 +1,9 @@
+import utils.transport
+import utils.session
 from pyray import *
 import math
 import random
 
-# TODO: build a cube
-# TODO: slide the cube
 # TODO: tween the cube
 
 
@@ -11,8 +11,13 @@ def main():
     init_window(900, 500, "3d movement")
     rl_set_line_width(3)
     camera = Camera3D((0,0.5,0), (1,.5,1), (0,1,0), 60, CAMERA_PERSPECTIVE)
-    map_size = 10
+    map_size = 3
     player = Player()
+
+    # build the cabinet once
+    cabinet = Cube()
+    drawer = Cube()
+
 
     while not window_should_close():
         player.controls()
@@ -24,18 +29,33 @@ def main():
         clear_background(SKYBLUE)
         begin_mode_3d(camera)
 
-        position = Vector3(1,1,1)
-
-        # DrawCube(Vector3 position, float width, float height, float length, Color color);     
-        draw_cube((Vector3(1, 0.0, 0.5)), 0.4, 1.0, 0.25, RED)
-
         draw_grid(map_size * 10, 0.2)
         draw_plane((0, -.01, 0),(map_size * 2, map_size * 2), WHITE)
+
+        # TODO: make a drawer in the cabinet, and make it slide in and out
+        draw_cube(cabinet.pos, 0.4, 1.0, 0.25, GRAY)
+
+
+        # this moves the cube between two places -- use this to open and close it
+        if is_key_down(KEY_T):
+            cube.move_cube(Vector3(1, 0.0, 1))
+            draw_cube(cube.pos, 0.4, 1.0, 0.25, GRAY)
+
+        if is_key_down(KEY_Q):
+            cube.move_cube(Vector3(1, 0.0, .5))
+            draw_cube(cube.pos, 0.4, 1.0, 0.25, GRAY)
 
         end_mode_3d()
 
 
         end_drawing()
+
+class Cube():
+    def __init__(self) -> None:
+        # TODO hardcoded, should change in the future to take user input
+        self.pos = (Vector3(1, 0.0, 0.5))
+    def move_cube(self, new_pos: Vector3) -> None:
+        self.pos = new_pos
 
 class Player():
 
